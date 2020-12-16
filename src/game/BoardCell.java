@@ -33,7 +33,7 @@ public class BoardCell extends JLabel implements MouseListener{
         int margin_left = this.getWidth() / 10;
         int margin_top = this.getHeight() / 10;
 
-        //draw highlight
+        //draw highlight (to mau nhung o cos nuoc di tiep theo)
         if(highlight == 1) {
             g.setColor(new Color(138, 177, 62));
             g.fillRect(0,0,this.getWidth(),this.getHeight());
@@ -56,21 +56,26 @@ public class BoardCell extends JLabel implements MouseListener{
         //draw piece
         int value = ge.getBoardValue(i,j);
         if(value == 1){
+        	g.setColor(new Color(240, 240, 240));
+        	g.fillOval(margin_left,margin_top,this.getWidth()-2*margin_left,this.getHeight()-2*margin_top);
             g.setColor(Color.BLACK);
-            g.fillOval(margin_left,margin_top,this.getWidth()-2*margin_left,this.getHeight()-2*margin_top);
+            g.fillOval(margin_left,margin_top,this.getWidth()-2*margin_left-3,this.getHeight()-2*margin_top-3);
         }
         else if(value == 2) {
-            g.setColor(Color.WHITE);
-            g.fillOval(margin_left,margin_top,this.getWidth()-2*margin_left,this.getHeight()-2*margin_top);
+        	g.setColor(Color.BLACK);
+        	g.fillOval(margin_left,margin_top,this.getWidth()-2*margin_left,this.getHeight()-2*margin_top);
+        	g.setColor(new Color(240, 240, 240));
+            g.fillOval(margin_left,margin_top,this.getWidth()-2*margin_left-5,this.getHeight()-2*margin_top-5);
         }
 
+        // draw text
         if(!text.isEmpty()){
             g.setColor(new Color(255, 255, 0));
             Font font = g.getFont();
             Font nfont = new Font(font.getName(),Font.PLAIN,30);
             g.setFont(nfont);
-
-            drawStringInCenterOfRectangle(g,0,0,this.getWidth(),this.getHeight(),text);
+            
+           // drawStringInCenterOfRectangle(g,0,0,this.getWidth(),this.getHeight(),text);
         }
 
         //g.setColor(new Color(100,100,100));

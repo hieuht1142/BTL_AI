@@ -5,9 +5,10 @@ import game.GamePlayer;
 import java.awt.*;
 
 public class HumanPlayer extends GamePlayer {
-
-    public HumanPlayer(int mark) {
+	private String name;
+    public HumanPlayer(int mark, String name) {
         super(mark);
+        this.name = name;
     }
 
     @Override
@@ -17,7 +18,7 @@ public class HumanPlayer extends GamePlayer {
 
     @Override
     public String playerName() {
-        return "User" ;
+        return name ;
     }
 
     @Override

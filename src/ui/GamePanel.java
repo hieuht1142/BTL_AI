@@ -1,4 +1,4 @@
-package game;
+package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,9 +13,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import player.HumanPlayer;
+import game.GameManager;
+import players.HumanPlayer;
+import players.Player;
 
-public class GamePanel1 extends JPanel implements GameEngine {
+public class GamePanel extends JPanel implements GameEngine {
 
 	int[][] board;
 	
@@ -23,8 +25,8 @@ public class GamePanel1 extends JPanel implements GameEngine {
 	
 	BoardCell[][] cells;
 	
-	GamePlayer player1;
-	GamePlayer player2;
+	Player player1;
+	Player player2;
 	
 	JPanel reversiBoard;
 	JPanel leftSide;
@@ -51,11 +53,11 @@ public class GamePanel1 extends JPanel implements GameEngine {
 
 	@Override
 	public void handleClick(int i, int j) {
-		if(awaitForClick && BoardHelper.canPlay(board, turn, i, j)) {
+		if(awaitForClick && GameManager.canPlay(board, turn, i, j)) {
 			System.out.println("User Played in : "+ i + " , " + j);
 			
 			//update board
-            board = BoardHelper.getNewBoardAfterMove(board,new Point(i,j),turn);
+            board = GameManager.getNewBoardAfterMove(board,new Point(i,j),turn);
 
             //advance turn
             turn = (turn == 1) ? 2 : 1;
@@ -70,15 +72,15 @@ public class GamePanel1 extends JPanel implements GameEngine {
 		
 	}
 	
-	public void handleAI(GamePlayer ai){
+	public void handleAI(Player ai){
         Point aiPlayPoint = ai.play(board);
         int i = aiPlayPoint.x;
         int j = aiPlayPoint.y;
-        if(!BoardHelper.canPlay(board,ai.myMark,i,j)) System.err.println("FATAL : AI Invalid Move !");
-        System.out.println(ai.playerName() + " Played in : "+ i + " , " + j);
+        if(!GameManager.canPlay(board,ai.getPlayerNumber(),i,j)) System.err.println("FATAL : AI Invalid Move !");
+        System.out.println(ai.toString() + " Played in : "+ i + " , " + j);
 
         //update board
-        board = BoardHelper.getNewBoardAfterMove(board,aiPlayPoint,turn);
+        board = GameManager.getNewBoardAfterMove(board,aiPlayPoint,turn);
 
         //advance turn
         turn = (turn == 1) ? 2 : 1;
@@ -86,7 +88,7 @@ public class GamePanel1 extends JPanel implements GameEngine {
         repaint();
     }
 		
-	public GamePanel1(GamePlayer player1, GamePlayer player2) {
+	public GamePanel(Player player1, Player player2) {
 		this.player1 = player1;
 		this.player2 = player2;
 	
@@ -121,8 +123,8 @@ public class GamePanel1 extends JPanel implements GameEngine {
     	JPanel player1Bar = new Oval(1);	
     	JPanel player2Bar = new Oval(2); 
     	
-    	leftSide.add(new JLabel(player1.playerName())); leftSide.add(player1Bar); leftSide.add(score1);
-    	rightSide.add(new JLabel(player2.playerName())); rightSide.add(player2Bar); rightSide.add(score2);
+    	leftSide.add(new JLabel(player1.toString())); leftSide.add(player1Bar); leftSide.add(score1);
+    	rightSide.add(new JLabel(player2.toString())); rightSide.add(player2Bar); rightSide.add(score2);
     	
     	
     	updateBoardInfo();   	
@@ -148,11 +150,11 @@ public class GamePanel1 extends JPanel implements GameEngine {
 	
 	public boolean awaitForClick = false;
 	public void manageTurn() {
-		if(BoardHelper.hasAnyMoves(board, 1) || BoardHelper.hasAnyMoves(board, 2)) {
+		if(GameManager.hasAnyMoves(board, 1) || GameManager.hasAnyMoves(board, 2)) {
 			updateBoardInfo();
 			if(turn == 1) {
-				if(BoardHelper.hasAnyMoves(board, 1)) {
-					if(player1.isUserPlayer()) {
+				if(GameManager.hasAnyMoves(board, 1)) {
+					if(player1.isHumanPlayer()) {
 						awaitForClick = true;
 					}
 					else {
@@ -164,13 +166,13 @@ public class GamePanel1 extends JPanel implements GameEngine {
 					manageTurn();
 				}
 			}else {
-				if(BoardHelper.hasAnyMoves(board, 2)) {
-					if(player2.isUserPlayer()) {
+				if (GameManager.hasAnyMoves(board, 2)) {
+					if(player2.isHumanPlayer()) {
 						awaitForClick = true;
-					}else {
+					} else {
 						player2HandlerTimer.restart();
 					}
-				}else {
+				} else {
 					System.out.println("Player 2 has no legal moves");
 					turn = 1;
 					manageTurn();
@@ -180,13 +182,13 @@ public class GamePanel1 extends JPanel implements GameEngine {
 		
 		else {
 			System.out.println("Game finished !");
-			int winner = BoardHelper.getWinner(board);
+			int winner = GameManager.getWinner(board);
 			if(winner == 1) System.out.println("Player 1 won");
 			else System.out.println("Player 2 won");
 			
 			String message = "";
-			if(winner == 1) message = player1.playerName() + " win";
-			else message = player2.playerName() + " win";
+			if(winner == 1) message = player1.toString() + " win";
+			else message = player2.toString() + " win";
 			
 			JOptionPane.showMessageDialog(this, message);
 		}
@@ -213,12 +215,12 @@ public class GamePanel1 extends JPanel implements GameEngine {
 		
 		for(int i = 0 ; i < 8; i++) {
 			for(int j = 0; j < 8; j++) {
-				if(board[i][j] == 1) totalScore1++;
-				if(board[i][j] == 2) totalScore2++;
+				if (board[i][j] == 1) totalScore1++;
+				if (board[i][j] == 2) totalScore2++;
 				
-				if(BoardHelper.canPlay(board,turn,i,j)){
+				if (GameManager.canPlay(board,turn,i,j)) {
                     cells[i][j].highlight = 1;
-                }else{
+                } else {
                     cells[i][j].highlight = 0;
                 }
 			}
@@ -227,4 +229,5 @@ public class GamePanel1 extends JPanel implements GameEngine {
 		score1.setText(totalScore1.toString());
 		score2.setText(totalScore2.toString());
 	}
+	
 }

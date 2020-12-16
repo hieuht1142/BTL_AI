@@ -1,4 +1,4 @@
-package game;
+package ui;
 
 //interface that gui speaks to
 public interface GameEngine {

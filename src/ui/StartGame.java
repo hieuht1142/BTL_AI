@@ -1,16 +1,15 @@
+package ui;
 
-package game;
-
-import player.HumanPlayer;
-import player.ai.DynamicEvaluator;
-import player.ai.MinimaxPlayer;
-import player.ai.RealtimeEvaluator;
-import player.ai.StaticEvaluator;
+import evaluators.SecondEvaluator;
+import evaluators.FirstEvaluator;
+import players.HumanPlayer;
+import players.MinimaxPlayer;
+import players.Player;
 
 public class StartGame extends javax.swing.JFrame {
 
-    private GamePlayer player1;
-    private GamePlayer player2;
+    private Player player1;
+    private Player player2;
     
     public StartGame() {
         initComponents();
@@ -73,22 +72,21 @@ public class StartGame extends javax.swing.JFrame {
         String level = LevelCombo.getSelectedItem().toString();
         
         player1 = new HumanPlayer(1, name);
-        //player1 = new AIPlayerRealtimeKiller(1, 6, true);
         switch(level) {
         	default :
-        		player2 = new MinimaxPlayer(2, 4, new StaticEvaluator());
+        		player2 = new MinimaxPlayer(2, 4, new FirstEvaluator());
         		break;
         	
         	case "2" :
-        		player2 = new MinimaxPlayer(2, 5, new StaticEvaluator());
+        		player2 = new MinimaxPlayer(2, 5, new FirstEvaluator());
         		break;
         		
         	case "3" :
-        		player2 = new MinimaxPlayer(2, 5, new DynamicEvaluator());
+        		player2 = new MinimaxPlayer(2, 5, new SecondEvaluator());
         		break;
         	
         	case "4" :
-        		player2 = new MinimaxPlayer(2, 6, new DynamicEvaluator());
+        		player2 = new MinimaxPlayer(2, 6, new SecondEvaluator());
         		break;
         		
         }

@@ -2,7 +2,6 @@ package game;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public final class GameManager {
@@ -38,6 +37,23 @@ public final class GameManager {
         } else { 					//p2 wins               
             return 2;
         }        
+    }
+    
+    public enum Phase {
+    	BEGIN, MIDDLE, END
+    }
+    
+    public static Phase getGamePhase(int[][] board) {
+    	
+    	int numDisc = Board.getTotalDiscNum(board);
+    	
+		if (numDisc <= 20) {
+			return Phase.BEGIN;
+		} else if (numDisc <= 50) {
+			return Phase.MIDDLE;
+		} else {
+			return Phase.END;
+		}
     }
 
     public static boolean hasAnyMoves(int[][] board, int player) {
@@ -97,7 +113,7 @@ public final class GameManager {
     }
 
     public static int[][] getNewBoardAfterMove(int[][] board, Point move , int player){
-        //get clone of old board
+       
     	int[][] newboard = new int[8][8];
         for (int k = 0; k < 8; k++) {
             for (int l = 0; l < 8; l++) {
@@ -105,9 +121,8 @@ public final class GameManager {
             }
         }
 
-        //place piece
         newboard[move.x][move.y] = player;
-        //reverse pieces
+        
         List<Point> rev = getReverseDiscs(newboard,player,move.x,move.y);
         for(Point pt : rev){
             newboard[pt.x][pt.y] = player;

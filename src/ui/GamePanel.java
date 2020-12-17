@@ -8,14 +8,15 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 
 import javax.swing.BoxLayout;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import game.GameManager;
 import players.Player;
 
+@SuppressWarnings("serial")
 public class GamePanel extends JPanel implements GameEngine {
 
 	int[][] board;
@@ -26,7 +27,6 @@ public class GamePanel extends JPanel implements GameEngine {
 	
 	Player player1;
 	Player player2;
-	JFrame parentFrame;
 	
 	JPanel reversiBoard;
 	JPanel leftSide;
@@ -88,11 +88,10 @@ public class GamePanel extends JPanel implements GameEngine {
         repaint();
     }
 		
-	public GamePanel(Player player1, Player player2, JFrame parentFrame) {
+	public GamePanel(Player player1, Player player2) {
 		this.player1 = player1;
 		this.player2 = player2;
-		this.parentFrame = parentFrame;
-		
+	
     	this.setBackground(new Color(189, 189, 189));
     	this.setLayout(new BorderLayout());
     	
@@ -191,14 +190,10 @@ public class GamePanel extends JPanel implements GameEngine {
 			if(winner == 1) message = player1.toString() + " win";
 			else message = player2.toString() + " win";
 			
-			this.removeAll();
-			this.setLayout(new BorderLayout());
-			this.add(new EndGame(player1, player2, message, parentFrame));
-			this.validate();
-	        this.repaint();
+			JOptionPane.showMessageDialog(this, message);
 		}
 	}
-
+	
 	public void resetBoard() {
 		board = new int[8][8];
 		
@@ -224,9 +219,9 @@ public class GamePanel extends JPanel implements GameEngine {
 				if (board[i][j] == 2) totalScore2++;
 				
 				if (GameManager.canPlay(board,turn,i,j)) {
-                    cells[i][j].highlight = 1;
+                    cells[i][j].setHighlight(1); 
                 } else {
-                    cells[i][j].highlight = 0;
+                    cells[i][j].setHighlight(0);
                 }
 			}
 		}

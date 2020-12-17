@@ -101,7 +101,7 @@ public class MinimaxPlayer extends Player {
 	
 	@Override
 	public String toString() {
-		return "Minimax player";
+		return "Minimax player " +getPlayerNumber() + "\n(" + searchDepth + ", " + evaluator.toString() + ")";
 	}
 		
 }

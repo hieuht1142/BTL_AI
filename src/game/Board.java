@@ -9,7 +9,7 @@ public final class Board {
 	private Board() { }
 	
 	/**
-	 * 
+	 * Create the initial board
 	 * @return initial board
 	 */
 	public static int[][] getNewBoard() {
@@ -26,9 +26,9 @@ public final class Board {
     }
 	
 	/**
-	 * 
-	 * @param board
-	 * @param player
+	 * Count the disc number of the given player
+	 * @param board the board
+	 * @param player the player to counting
 	 * @return the disc number of the player 
 	 */
 	public static int getPlayerDiscNum(int[][] board, int player) {
@@ -42,8 +42,8 @@ public final class Board {
     }
 	
 	/**
-	 * 
-	 * @param board
+	 * Count total disc number of the board
+	 * @param board computed board
 	 * @return the total disc number on board
 	 */
 	public static int getTotalDiscNum(int[][] board) {
@@ -51,8 +51,13 @@ public final class Board {
     }
 	
 	/**
-	 * This method is used to count stable discs
-	 * @return the number of stable discs (
+	 * Count the number of stable discs for current player.
+	 * This method using {@link #getStableDiscsWithCorner(int[][], int, int, int)} for computation
+	 *
+	 * @param board current playing board
+	 * @param player current player
+	 * 
+	 * @return the number of stable discs
 	 */
 	public static int getStableDiscNum(int[][] board, int player) {
 		
@@ -65,6 +70,18 @@ public final class Board {
 		return stableDiscs.size();
 	}
 	
+	/**
+	 * Count the number of stable discs with the given corner. <br/>
+	 * There are four corners with corresponding (i, j) ( (0, 0), (0, 7), (7, 0), (7, 7) )
+	 * 
+	 * @param board current playing board
+	 * @param player the number player
+	 * @param i i index of the corner point
+	 * @param j j index of the corner point
+	 * 
+	 * @return the number of stable discs with the given corner
+	 * @see #getStableDiscNum(int[][], int)
+	 */
 	private static Set<Point> getStableDiscsWithCorner(int[][] board, int player, int i, int j) {
 		
 		Set<Point> result = new HashSet<>();

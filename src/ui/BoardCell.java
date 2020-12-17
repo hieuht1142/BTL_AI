@@ -8,17 +8,16 @@ import java.awt.event.MouseListener;
 import java.awt.font.FontRenderContext;
 import java.awt.font.LineMetrics;
 
+@SuppressWarnings("serial")
 public class BoardCell extends JLabel implements MouseListener{
+    private int i;
+    private int j;
 
-    int i;
-    int j;
+    private GameEngine ge;
+    private JPanel parent;
 
-    GameEngine ge;
-    JPanel parent;
-
-    public int highlight = 0;
-
-    public String text = "";
+    private int highlight = 0;
+    private String text = "";
 
     public BoardCell(GameEngine ge ,JPanel parent,int i,int j){
         this.ge = ge;
@@ -27,6 +26,10 @@ public class BoardCell extends JLabel implements MouseListener{
         this.j = j;
         this.addMouseListener(this);
     }
+    
+    public void setHighlight(int highlight) {
+		this.highlight = highlight;
+	}
 
     @Override
     public void paint(Graphics g) {
@@ -34,18 +37,18 @@ public class BoardCell extends JLabel implements MouseListener{
         int margin_left = this.getWidth() / 10;
         int margin_top = this.getHeight() / 10;
 
-        //draw highlight (to mau nhung o cos nuoc di tiep theo)
-        if(highlight == 1) {
+        //draw highlight (to mau nhung o co nuoc di tiep theo)
+        if (highlight == 1) {
             g.setColor(new Color(138, 177, 62));
             g.fillRect(0,0,this.getWidth(),this.getHeight());
             g.setColor(parent.getBackground());
             g.fillRect(4,4,this.getWidth()-8,this.getHeight()-8);
-        }else if(highlight == 2){
+        } else if (highlight == 2) {
             g.setColor(new Color(177, 158, 70));
             g.fillRect(0,0,this.getWidth(),this.getHeight());
             g.setColor(parent.getBackground());
             g.fillRect(4,4,this.getWidth()-8,this.getHeight()-8);
-        }else if(highlight == 10){
+        } else if (highlight == 10){
             g.setColor(new Color(177, 43, 71));
             g.fillRect(0,0,this.getWidth(),this.getHeight());
         }
@@ -61,8 +64,7 @@ public class BoardCell extends JLabel implements MouseListener{
         	g.fillOval(margin_left,margin_top,this.getWidth()-2*margin_left,this.getHeight()-2*margin_top);
             g.setColor(Color.BLACK);
             g.fillOval(margin_left,margin_top,this.getWidth()-2*margin_left-3,this.getHeight()-2*margin_top-3);
-        }
-        else if(value == 2) {
+        } else if (value == 2) {
         	g.setColor(Color.BLACK);
         	g.fillOval(margin_left,margin_top,this.getWidth()-2*margin_left,this.getHeight()-2*margin_top);
         	g.setColor(new Color(240, 240, 240));

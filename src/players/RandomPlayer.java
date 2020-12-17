@@ -27,5 +27,10 @@ public class RandomPlayer extends Player {
 		if (possibleMoves.size() == 0) return null;
 		return possibleMoves.get(random.nextInt(possibleMoves.size()));
 	}
+	
+	@Override
+	public String toString() {
+		return "Random player";
+	}
 
 }

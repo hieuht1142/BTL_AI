@@ -19,7 +19,7 @@ public class WeightTableEvaluator extends Heuristics implements Evaluator {
 	}
 	
 	public String toString() {
-		return "SecondEval";
+		return "WeightEval";
 	}
 
 }

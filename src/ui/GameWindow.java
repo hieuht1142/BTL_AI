@@ -11,7 +11,7 @@ public class GameWindow extends JFrame {
     public GameWindow(Player player1, Player player2){
         GamePanel gp = new GamePanel(player1, player2, this);
         this.add(gp);
-        this.setTitle("Reversi v0.1");
+        this.setTitle("Othello");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.pack();
         this.setVisible(true);

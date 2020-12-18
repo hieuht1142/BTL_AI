@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -77,7 +76,8 @@ public class GamePanel extends JPanel implements GameEngine {
         Point aiPlayPoint = ai.play(board);
         int i = aiPlayPoint.x;
         int j = aiPlayPoint.y;
-        if(!GameManager.canPlay(board,ai.getPlayerNumber(),i,j)) System.err.println("FATAL : AI Invalid Move !");
+        if(!GameManager.canPlay(board,ai.getPlayerNumber(),i,j)) 
+        	System.err.println("FATAL : AI Invalid Move !");
         System.out.println(ai.toString() + " Played in : "+ i + " , " + j);
 
         //update board

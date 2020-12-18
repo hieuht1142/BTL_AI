@@ -7,7 +7,7 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class Oval extends JPanel{
+public class Oval extends JPanel {
 	
 	int mark;
 	
@@ -17,9 +17,9 @@ public class Oval extends JPanel{
 	}
 	
 	public void paint(Graphics g) {
-		if(mark == 1) {
+		if (mark == 1) {
 			g.setColor(Color.BLACK);
-		}else {
+		} else {
 			g.setColor(Color.WHITE);
 		}
 		

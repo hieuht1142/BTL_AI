@@ -106,27 +106,32 @@ public class GamePanel extends JPanel implements GameEngine {
     	
     	cells = new BoardCell[8][8];
     	
-    	for(int i = 0; i < 8; i++) {
-    		for(int j = 0; j < 8; j++) {
-    			cells[i][j] = new BoardCell(this,reversiBoard,i,j);
+    	for (int i = 0; i < 8; i++) {
+    		for (int j = 0; j < 8; j++) {
+    			cells[i][j] = new BoardCell(this, reversiBoard, i, j);
                 reversiBoard.add(cells[i][j]);
     		}
     	}
-    	leftSide = new JPanel(); leftSide.setPreferredSize(new Dimension(150, 0));
+    	leftSide = new JPanel();
+    	leftSide.setPreferredSize(new Dimension(150, 0));
     	leftSide.setLayout(new BoxLayout(leftSide, BoxLayout.Y_AXIS));
     	
     	rightSide = new JPanel(); rightSide.setPreferredSize(new Dimension(150, 0));
     	rightSide.setLayout(new BoxLayout(rightSide, BoxLayout.Y_AXIS));
     	
-    	score1 = new JLabel("Score1: "); score1.setFont(new java.awt.Font("Arial", 1, 100));
-    	score2 = new JLabel("Score2: "); score2.setFont(new java.awt.Font("Arial", 1, 100));
+    	score1 = new JLabel("Score1: "); 
+    	score1.setFont(new java.awt.Font("Arial", 1, 100));
+    	score2 = new JLabel("Score2: "); 
+    	score2.setFont(new java.awt.Font("Arial", 1, 100));
     	
     	
     	JPanel player1Bar = new Oval(1);	
     	JPanel player2Bar = new Oval(2); 
     	
-    	leftSide.add(new JLabel(player1.toString())); leftSide.add(player1Bar); leftSide.add(score1);
-    	rightSide.add(new JLabel(player2.toString())); rightSide.add(player2Bar); rightSide.add(score2);
+    	leftSide.add(new JLabel(player1.toString())); 
+    	leftSide.add(player1Bar); leftSide.add(score1);
+    	rightSide.add(new JLabel(player2.toString())); 
+    	rightSide.add(player2Bar); rightSide.add(score2);
     	
     	
     	updateBoardInfo();   	
@@ -152,14 +157,13 @@ public class GamePanel extends JPanel implements GameEngine {
 	
 	public boolean awaitForClick = false;
 	public void manageTurn() {
-		if(GameManager.hasAnyMoves(board, 1) || GameManager.hasAnyMoves(board, 2)) {
+		if (GameManager.hasAnyMoves(board, 1) || GameManager.hasAnyMoves(board, 2)) {
 			updateBoardInfo();
-			if(turn == 1) {
-				if(GameManager.hasAnyMoves(board, 1)) {
-					if(player1.isHumanPlayer()) {
+			if (turn == 1) {
+				if (GameManager.hasAnyMoves(board, 1)) {
+					if (player1.isHumanPlayer()) {
 						awaitForClick = true;
-					}
-					else {
+					} else {
 						player1HandlerTimer.start();
 					}
 				}else {
@@ -167,9 +171,9 @@ public class GamePanel extends JPanel implements GameEngine {
 					turn = 2;
 					manageTurn();
 				}
-			}else {
+			} else {
 				if (GameManager.hasAnyMoves(board, 2)) {
-					if(player2.isHumanPlayer()) {
+					if (player2.isHumanPlayer()) {
 						awaitForClick = true;
 					} else {
 						player2HandlerTimer.restart();
@@ -203,7 +207,7 @@ public class GamePanel extends JPanel implements GameEngine {
 	public void resetBoard() {
 		board = new int[8][8];
 		
-		for(int i = 0; i < 8; i++) {
+		for (int i = 0; i < 8; i++) {
 			for(int j = 0; j < 8; j++) {
 				board[i][j] = 0;
 			}
@@ -219,8 +223,8 @@ public class GamePanel extends JPanel implements GameEngine {
 		totalScore1 = 0;
 		totalScore2 = 0;
 		
-		for(int i = 0 ; i < 8; i++) {
-			for(int j = 0; j < 8; j++) {
+		for (int i = 0 ; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
 				if (board[i][j] == 1) totalScore1++;
 				if (board[i][j] == 2) totalScore2++;
 				

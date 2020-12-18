@@ -2,6 +2,7 @@
 package ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,12 +38,18 @@ public class EndGame extends JPanel {
     };
 
     private void initComponents() {
+    	
+    	this.setBackground(Color.green);
 
         yesBtn = new JButton();
         noBtn = new JButton();
         jPanel1 = new JPanel();
         thongBaoLb = new JLabel();
         jLabel2 = new JLabel();
+        
+        jPanel1.setBackground(Color.pink);
+        yesBtn.setBackground(Color.blue);
+        noBtn.setBackground(Color.orange);
 
         yesBtn.setFont(new Font("Times New Roman", 1, 26)); // NOI18N
         yesBtn.setText("YES");
@@ -103,7 +110,7 @@ public class EndGame extends JPanel {
 						.addComponent(yesBtn, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
 				.addContainerGap(187, Short.MAX_VALUE)));
 		
-    }// </editor-fold>                        
+    }                      
 
     private void yesBtnActionPerformed(ActionEvent evt) {                                       
 

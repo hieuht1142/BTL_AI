@@ -124,6 +124,7 @@ public class EndGame extends JPanel {
 
     private void noBtnActionPerformed(ActionEvent evt) {                                      
     	parentFrame.dispose();
+    	StartGame.main(null);
     }                                     
                  
 }

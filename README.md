@@ -1,7 +1,6 @@
-# BTL_AI
-# Nhóm 6
+# BTL_AI-Nhóm 6
 # Môn học:Nhập môn trí tuệ nhân tạo
-# Bài tập lớn:OthelloGame
+## Bài tập lớn:OthelloGame
 ## 1.GIỚI THIỆU.
 	Các hướng dẫn này sẽ cung cấp cho bạn cách thức cài đặt và trải nghiệm OthelloGame.
 ## 2.YÊU CẦU.

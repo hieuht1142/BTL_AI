@@ -16,4 +16,4 @@
 * **Bước 2:**: Điền tên hiển thị và chọn mức độ chơi.
 * **Bước 3:**: Trải nghiệm trò chơi.
 ### 4.2.Cách 2:Chạy bằng file jar.
-	Tìm đến thư mục vừa giải nén,nhấp chuột vào file .......jar rồi làm làm lần lượt bước 2,bước 3 trong mục 3.1.
+	Tìm đến thư mục vừa giải nén,nhấp chuột vào file Othello.jar rồi làm làm lần lượt bước 2,bước 3 trong mục 3.1.
